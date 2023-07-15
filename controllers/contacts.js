@@ -1,10 +1,10 @@
-const contacts = require('../models/contacts');
+const { Contact } = require('../models/contact');
 
 const { HttpError, ctrlWrapper } = require('../helpers');
 
 // Get a list of contacts
 const getListContacts = async (_, res) => {
-  const result = await contacts.getListContacts();
+  const result = await Contact.find();
 
   res.json(result);
 };
@@ -12,7 +12,7 @@ const getListContacts = async (_, res) => {
 // Get a contact by its ID
 const getContactById = async (req, res) => {
   const { id } = req.params;
-  const result = await contacts.getContactById(id);
+  const result = await Contact.findById(id);
 
   if (!result) throw HttpError(404, 'Not Found');
 
@@ -21,7 +21,7 @@ const getContactById = async (req, res) => {
 
 // Add a new contact
 const addContact = async (req, res) => {
-  const result = await contacts.addContact(req.body);
+  const result = await Contact.create(req.body);
 
   res.status(201).json(result);
 };
@@ -29,7 +29,17 @@ const addContact = async (req, res) => {
 // Update a contact by its ID
 const updateContactById = async (req, res, next) => {
   const { id } = req.params;
-  const result = await contacts.updateContactById(id, req.body);
+  const result = await Contact.findByIdAndUpdate(id, req.body, { new: true });
+
+  if (!result) throw HttpError(404, 'Not Found');
+
+  res.json(result);
+};
+
+// Update a favorite field by its ID
+const updateStatusContact = async (req, res, next) => {
+  const { id } = req.params;
+  const result = await Contact.findByIdAndUpdate(id, req.body, { new: true });
 
   if (!result) throw HttpError(404, 'Not Found');
 
@@ -39,13 +49,11 @@ const updateContactById = async (req, res, next) => {
 // Delete a contact by its ID
 const removeContact = async (req, res) => {
   const { id } = req.params;
-  const result = await contacts.removeContact(id);
+  const result = await Contact.findByIdAndRemove(id);
 
   if (!result) throw HttpError(404, 'Not Found');
 
-  res.json({
-    message: 'Contact deleted',
-  });
+  res.json({ message: 'Contact deleted' });
 };
 
 module.exports = {
@@ -53,5 +61,6 @@ module.exports = {
   getContactById: ctrlWrapper(getContactById),
   addContact: ctrlWrapper(addContact),
   updateContactById: ctrlWrapper(updateContactById),
+  updateStatusContact: ctrlWrapper(updateStatusContact),
   removeContact: ctrlWrapper(removeContact),
 };
