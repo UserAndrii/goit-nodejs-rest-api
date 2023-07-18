@@ -11,9 +11,9 @@ http://localhost:3000 - API base URL
 
 ## Users
 
-[POST] - `/users/register` - Create a new user
+### [POST] - `/users/register` - Create a new user
 
-### «Example Value | Schema»
+«Example Value | Schema»
 
 ```json
 {
@@ -23,7 +23,7 @@ http://localhost:3000 - API base URL
 }
 ```
 
-### Responses Code --- Description
+Responses Code --- Description
 
 - **201** - User created.
 
@@ -33,9 +33,9 @@ http://localhost:3000 - API base URL
 
 - **500** - Server error.
 
-[POST] - `/users/login` - Login user
+### [POST] - `/users/login` - Login user
 
-### «Example Value | Schema»
+«Example Value | Schema»
 
 ```json
 {
@@ -44,7 +44,7 @@ http://localhost:3000 - API base URL
 }
 ```
 
-### Responses Code --- Description
+Responses Code --- Description
 
 - **200** - User is logged in.
 
@@ -52,15 +52,13 @@ http://localhost:3000 - API base URL
 
 - **401** - Unauthorized
 
-[GET] - `/users/current` - Get information about the current user
+### [GET] - `/users/current` - Get information about the current user
 
-### «Example Value | Schema»
+«Example Value | Schema»
 
-```json
-  Authorization: "Bearer {{token}}"
-```
+`Authorization: "Bearer {{token}}"`
 
-### Responses Code --- Description
+Responses Code --- Description
 
 - **200** - User is logged in.
 
@@ -68,23 +66,21 @@ http://localhost:3000 - API base URL
 
 - **401** - Unauthorized
 
-[POST] - `/users/logout` - Log out user
+### [POST] - `/users/logout` - Log out user
 
-### «Example Value | Schema»
+«Example Value | Schema»
 
-```json
-  Authorization: "Bearer {{token}}"
-```
+`Authorization: "Bearer {{token}}"`
 
-### Responses Code --- Description
+Responses Code --- Description
 
 - **204** - The user is logged out.
 
 - **401** - Unauthorized
 
-[PATCH] - `/users` - Updating user's subscription
+### [PATCH] - `/users` - Updating user's subscription
 
-### «Example Value | Schema»
+«Example Value | Schema»
 
 ```json
 {
@@ -93,7 +89,7 @@ http://localhost:3000 - API base URL
 }
 ```
 
-### Responses Code --- Description
+Responses Code --- Description
 
 - **200** - User subscription successfully updated
 
@@ -101,29 +97,25 @@ http://localhost:3000 - API base URL
 
 ## Contacts
 
-[GET] - `/api/contacts` - Get all user contacts
+### [GET] - `/api/contacts` - Get all user contacts
 
-### «Example Value | Schema»
+«Example Value | Schema»
 
-```json
-  Authorization: "Bearer {{token}}"
-```
+`Authorization: "Bearer {{token}}"`
 
-### Responses Code --- Description
+Responses Code --- Description
 
 - **200** - Contacts found.
 
 - **401** - Unauthorized
 
-[GET] - `/api/contacts/:id` - Get all user contacts
+### [GET] - `/api/contacts/:id` - Get all user contacts
 
-### «Example Value | Schema»
+«Example Value | Schema»
 
-```json
-  Authorization: "Bearer {{token}}"
-```
+`Authorization: "Bearer {{token}}"`
 
-### Responses Code --- Description
+Responses Code --- Description
 
 - **200** - Contact found.
 
@@ -131,9 +123,9 @@ http://localhost:3000 - API base URL
 
 - **404** - There is no such id
 
-[POST] - `/api/contacts` - Get all user contacts
+### [POST] - `/api/contacts` - Get all user contacts
 
-### «Example Value | Schema»
+«Example Value | Schema»
 
 ```json
 {
@@ -143,7 +135,7 @@ http://localhost:3000 - API base URL
 }
 ```
 
-### Responses Code --- Description
+Responses Code --- Description
 
 - **201** - Create a new contact
 
@@ -153,9 +145,9 @@ http://localhost:3000 - API base URL
 
 - **404** - Not Found
 
-[PUT] - `/api/contacts/:id` - Update an existing contact
+### [PUT] - `/api/contacts/:id` - Update an existing contact
 
-### «Example Value | Schema»
+«Example Value | Schema»
 
 ```json
 {
@@ -165,7 +157,7 @@ http://localhost:3000 - API base URL
 }
 ```
 
-### Responses Code --- Description
+Responses Code --- Description
 
 - **200** - The contact was successfully updated.
 
@@ -175,9 +167,9 @@ http://localhost:3000 - API base URL
 
 - **404** - Not Found
 
-[PATCH] - `/api/contacts/:id/favorite` - Update a favorite field by its ID
+### [PATCH] - `/api/contacts/:id/favorite` - Update a favorite field by its ID
 
-### «Example Value | Schema»
+«Example Value | Schema»
 
 ```json
 {
@@ -185,7 +177,7 @@ http://localhost:3000 - API base URL
 }
 ```
 
-### Responses Code --- Description
+Responses Code --- Description
 
 - **200** - The favorite field was successfully updated.
 
@@ -195,15 +187,13 @@ http://localhost:3000 - API base URL
 
 - **404** - Not Found
 
-[DELETE] - `/api/contacts/:id` - Delete contact
+### [DELETE] - `/api/contacts/:id` - Delete contact
 
-### «Example Value | Schema»
+«Example Value | Schema»
 
-```json
-  Authorization: "Bearer {{token}}"
-```
+`Authorization: "Bearer {{token}}"`
 
-### Responses Code --- Description
+Responses Code --- Description
 
 - **200** - The contact was successfully deleted.
 
