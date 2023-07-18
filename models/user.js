@@ -16,18 +16,21 @@ const userShema = new Schema(
       required: [true, 'Set password for user'],
       minlenght: [6, 'The password field must be at least 6 characters long'],
     },
+
     email: {
       type: String,
       required: [true, 'Email is required'],
       unique: true,
       match: [emailRegexp, 'Invalid email format'],
     },
+
     subscription: {
       type: String,
       enum: ['starter', 'pro', 'business'],
       default: 'starter',
     },
-    token: String,
+
+    token: { type: String, default: '' },
   },
   { versionKey: false, timestamps: true }
 );
@@ -53,8 +56,24 @@ const userValidationShema = Joi.object({
   }),
 });
 
+const subscriptionRenewalSchema = Joi.object({
+  id: Joi.string().required().messages({
+    'any.required': 'Missing required id field',
+  }),
+
+  subscription: Joi.string()
+    .valid('starter', 'pro', 'business')
+    .required()
+    .messages({
+      'any.required': 'Missing required subscription field',
+      'any.only':
+        'Invalid subscription type. Valid values are "starter", "pro", or "business".',
+    }),
+});
+
 const schemas = {
   userValidationShema,
+  subscriptionRenewalSchema,
 };
 
 const User = model('user', userShema);

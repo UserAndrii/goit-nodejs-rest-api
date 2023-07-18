@@ -2,10 +2,10 @@ const express = require('express');
 
 const ctrl = require('../../controllers/users');
 
-const { validateBody } = require('../../middlewares');
+const { validateBody, authenticate } = require('../../middlewares');
 
 const {
-  schemas: { userValidationShema },
+  schemas: { userValidationShema, subscriptionRenewalSchema },
 } = require('../../models/user');
 
 const router = express.Router();
@@ -13,5 +13,15 @@ const router = express.Router();
 router.post('/register', validateBody(userValidationShema), ctrl.registerUser);
 
 router.post('/login', validateBody(userValidationShema), ctrl.loginUser);
+
+router.get('/current', authenticate, ctrl.getCurrentUser);
+
+router.post('/logout', authenticate, ctrl.logoutUser);
+
+router.patch(
+  '/',
+  validateBody(subscriptionRenewalSchema),
+  ctrl.updateUserSubscription
+);
 
 module.exports = router;
