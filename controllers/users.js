@@ -44,12 +44,13 @@ const getCurrentUser = async (req, res) => {
 
 // Updating user's subscription, response: object with email and subscription.
 const updateUserSubscription = async (req, res) => {
-  const { id, subscription } = req.body;
+  const { _id: id } = req.user;
+  const { subscription } = req.body;
 
   const result = await User.findByIdAndUpdate(
     id,
     { subscription },
-    { new: true, select: 'email subscription' }
+    { new: true, select: '-_id email subscription' }
   );
 
   if (!result) throw HttpError(404, 'Not Found');

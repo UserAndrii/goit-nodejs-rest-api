@@ -20,6 +20,7 @@ router.post('/logout', authenticate, ctrl.logoutUser);
 
 router.patch(
   '/',
+  authenticate,
   validateBody(subscriptionRenewalSchema),
   ctrl.updateUserSubscription
 );

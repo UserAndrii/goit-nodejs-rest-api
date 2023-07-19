@@ -57,10 +57,6 @@ const userValidationShema = Joi.object({
 });
 
 const subscriptionRenewalSchema = Joi.object({
-  id: Joi.string().required().messages({
-    'any.required': 'Missing required id field',
-  }),
-
   subscription: Joi.string()
     .valid('starter', 'pro', 'business')
     .required()

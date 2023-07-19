@@ -82,9 +82,10 @@ Responses Code --- Description
 
 «Example Value | Schema»
 
+`Authorization: "Bearer {{token}}"`
+
 ```json
 {
-  "id": "user id",
   "subscription": "['starter', 'pro', 'business']"
 }
 ```
