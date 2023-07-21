@@ -1,11 +1,16 @@
 require('dotenv').config();
+const path = require('path');
 const bcrypt = require('bcrypt');
+const fs = require('fs/promises');
 const jwt = require('jsonwebtoken');
+const gravatar = require('gravatar');
 
 const { User } = require('../models/user');
 const { HttpError, ctrlWrapper } = require('../helpers');
 
 const { SECRET_KEY } = process.env;
+
+const avatarsDir = path.join(__dirname, '..', 'public', 'avatars');
 
 // Registration of a new user, password hashing, response: user object with email and subscription.
 const registerUser = async (req, res) => {
@@ -14,8 +19,14 @@ const registerUser = async (req, res) => {
   const user = await User.findOne({ email });
   if (user) throw HttpError(409, 'Email in use');
 
+  const avatarURL = gravatar.url(email);
   const hashPassword = await bcrypt.hash(password, 10);
-  const newUser = await User.create({ ...req.body, password: hashPassword });
+
+  const newUser = await User.create({
+    ...req.body,
+    password: hashPassword,
+    avatarURL,
+  });
 
   res.status(201).json({ user: { email, subscription: newUser.subscription } });
 };
@@ -58,6 +69,21 @@ const updateUserSubscription = async (req, res) => {
   res.json(result);
 };
 
+const updateUserAvatar = async (req, res) => {
+  const { _id: id } = req.user;
+  const { path: tempUpload, originalname } = req.file;
+
+  const fileName = `${id}_${originalname}`;
+
+  const resultUpload = path.join(avatarsDir, fileName);
+  fs.rename(tempUpload, resultUpload);
+  const avatarURL = path.join('avatars', fileName);
+
+  await User.findByIdAndUpdate(id, { avatarURL });
+
+  res.json({ avatarURL });
+};
+
 // Log out of the user, token deletion, sending a response to the client with status code 204.
 const logoutUser = async (req, res) => {
   const { _id } = req.user;
@@ -71,5 +97,6 @@ module.exports = {
   loginUser: ctrlWrapper(loginUser),
   getCurrentUser: ctrlWrapper(getCurrentUser),
   updateUserSubscription: ctrlWrapper(updateUserSubscription),
+  updateUserAvatar: ctrlWrapper(updateUserAvatar),
   logoutUser: ctrlWrapper(logoutUser),
 };

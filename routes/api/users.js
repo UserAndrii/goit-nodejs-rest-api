@@ -2,7 +2,7 @@ const express = require('express');
 
 const ctrl = require('../../controllers/users');
 
-const { validateBody, authenticate } = require('../../middlewares');
+const { validateBody, authenticate, upload } = require('../../middlewares');
 
 const {
   schemas: { userValidationShema, subscriptionRenewalSchema },
@@ -17,6 +17,13 @@ router.post('/login', validateBody(userValidationShema), ctrl.loginUser);
 router.get('/current', authenticate, ctrl.getCurrentUser);
 
 router.post('/logout', authenticate, ctrl.logoutUser);
+
+router.patch(
+  '/avatars',
+  authenticate,
+  upload.single('avatar'),
+  ctrl.updateUserAvatar
+);
 
 router.patch(
   '/',
