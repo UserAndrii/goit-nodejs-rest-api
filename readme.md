@@ -96,6 +96,22 @@ Responses Code --- Description
 
 - **400** - User creation error.
 
+### [PATCH] - `/users/avatars` - Updates the user's avatar, resizes it to 250x250 pixels
+
+«Example Value | Schema»
+
+Content-Type: multipart/form-data
+
+`Authorization: "Bearer {{token}}"`
+
+`RequestBody: завантажений файл`
+
+Responses Code --- Description
+
+- **200** - User subscription successfully updated
+
+- **401** - Unauthorized
+
 ## Contacts
 
 ### [GET] - `/api/contacts` - Get all user contacts
