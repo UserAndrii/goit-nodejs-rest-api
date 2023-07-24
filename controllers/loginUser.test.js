@@ -36,7 +36,7 @@ describe('loginUser controller', () => {
   // must be an existing user in the database
   test('should respond with status code 200 and return a token and user object', async () => {
     const res = await request(app).post('/users/login', loginUser).send({
-      email: 'example@example.com',
+      email: 'gadar.andre@gmail.com',
       password: 'qwerty123',
     });
 
