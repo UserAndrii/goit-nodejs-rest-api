@@ -1,6 +1,8 @@
 const { User } = require('../../models/user');
 const { HttpError, ctrlWrapper } = require('../../helpers');
 
+// Define the function to verify user's email.
+// If verification is successful, send a success response
 const verifyUserEmail = async (req, res) => {
   const { verificationToken } = req.params;
 

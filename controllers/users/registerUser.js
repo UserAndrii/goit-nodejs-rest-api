@@ -5,7 +5,8 @@ const { nanoid } = require('nanoid');
 const { User } = require('../../models/user');
 const { HttpError, ctrlWrapper, sendEmail } = require('../../helpers');
 
-// Registration of a new user, password hashing, response: user object with email and subscription.
+// Registration of a new user, password hashing,
+// response: user object with email and subscription.
 const registerUser = async (req, res) => {
   const { email, password } = req.body;
 

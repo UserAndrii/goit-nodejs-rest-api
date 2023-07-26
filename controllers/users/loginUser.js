@@ -7,7 +7,8 @@ const { HttpError, ctrlWrapper } = require('../../helpers');
 
 const { SECRET_KEY } = process.env;
 
-// Authentication of the user, generation of JWT token, response: token, user object with email and subscription.
+// Authentication of the user, generation of JWT token,
+// response: token, user object with email and subscription.
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
