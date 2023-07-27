@@ -33,6 +33,24 @@ Responses Code --- Description
 
 - **500** - Server error.
 
+### [POST] - `/users/verify` - Re-sending an email to the user with a link for verification
+
+«Example Value | Schema»
+
+```json
+{
+  "email": "example@example.com"
+}
+```
+
+Responses Code --- Description
+
+- **200** - OK. Verification email sent
+
+- **400** - Verification has already been passed or email validation error
+
+- **500** - Server error.
+
 ### [POST] - `/users/login` - Login user
 
 «Example Value | Schema»
